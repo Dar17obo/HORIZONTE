@@ -1,0 +1,17 @@
+
+{
+  "name": "Radio Horizonte",
+  "short_name": "Horizonte",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "description": "Radio Horizonte 103.1 - Estamos con vos!",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
