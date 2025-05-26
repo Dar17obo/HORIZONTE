@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Radio Horizonte 103.1</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: sans-serif;
+        }
+        #background {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: url('background.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+        }
+        #barra {
+            position: absolute;
+            top: 42%;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-evenly;
+        }
+        .bar {
+            width: 4px;
+            background: white;
+            animation: bounce 1s infinite ease-in-out;
+        }
+        .bar:nth-child(1) { animation-delay: 0s; }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        .bar:nth-child(6) { animation-delay: 0.5s; }
+        .bar:nth-child(7) { animation-delay: 0.6s; }
+        .bar:nth-child(8) { animation-delay: 0.7s; }
+        .bar:nth-child(9) { animation-delay: 0.8s; }
+        .bar:nth-child(10) { animation-delay: 0.9s; }
+
+        @keyframes bounce {
+            0%, 100% {
+                height: 20px;
+            }
+            50% {
+                height: 80px;
+            }
+        }
+
+        #whatsapp {
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+
+        #controls {
+            position: absolute;
+            bottom: 10%;
+            width: 100%;
+            text-align: center;
+        }
+
+        #controls img {
+            width: 64px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        #datetime {
+            position: absolute;
+            bottom: 2%;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            text-shadow: 1px 1px 2px black;
+        }
+
+        #marquee {
+            position: absolute;
+            top: 32%;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            animation: scrollText 10s linear infinite;
+        }
+
+        @keyframes scrollText {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+
+    <div id="marquee">Estamos con Vos...</div>
+
+    <div id="barra">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div id="whatsapp" onclick="window.open('https://wa.me/543482391583', '_blank')">
+        <img src="contacto.png" alt="WhatsApp" width="80">
+    </div>
+
+    <div id="controls">
+        <img src="PAUSE.png" onclick="pauseAudio()" alt="Pausa">
+        <img src="PLAY.png" onclick="playAudio()" alt="Play">
+        <img src="STOP.png" onclick="stopAudio()" alt="Stop">
+    </div>
+
+    <div id="datetime"></div>
+
+    <audio id="radio" src="https://radio13.servidorderadio.net/9346/stream" type="audio/mpeg"></audio>
+
+    <script>
+        const audio = document.getElementById('radio');
+        function playAudio() {
+            audio.play();
+        }
+        function pauseAudio() {
+            audio.pause();
+        }
+        function stopAudio() {
+            audio.pause();
+            audio.currentTime = 0;
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            const formatted = now.toLocaleDateString('es-AR') + ' - ' + now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('datetime').textContent = formatted;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
