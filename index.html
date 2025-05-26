@@ -1,0 +1,146 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Horizonte</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: sans-serif;
+        }
+
+        .marquee {
+            position: absolute;
+            top: 25%;
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 2em;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 5px black;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 10s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        .equalizer {
+            position: absolute;
+            top: 40%;
+            width: 100%;
+            height: 100px;
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+
+        .bar {
+            width: 4px;
+            background: white;
+            animation: bounce 1s infinite ease-in-out alternate;
+        }
+
+        .bar:nth-child(2) { animation-delay: 0.2s; }
+        .bar:nth-child(3) { animation-delay: 0.4s; }
+        .bar:nth-child(4) { animation-delay: 0.6s; }
+        .bar:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes bounce {
+            0% { height: 20px; }
+            100% { height: 100px; }
+        }
+
+        .controls {
+            position: absolute;
+            bottom: 80px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .controls button {
+            background: red;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 1.2em;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .whatsapp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="marquee"><span>ESTAMOS CON VOS...</span></div>
+
+    <div class="equalizer">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
+
+    <div class="controls">
+        <button onclick="document.getElementById('stream').play()">▶</button>
+        <button onclick="document.getElementById('stream').pause()">⏸</button>
+        <button onclick="document.getElementById('stream').load()">■</button>
+    </div>
+
+    <audio id='stream'>
+        <source src="https://radio13.servidorderadio.net/9346/stream" type="audio/mpeg">
+    </audio>
+
+    <div class="footer">
+        <span id="datetime"></span>
+    </div>
+
+    <a href="https://wa.me/543482391583" target="_blank">
+        <img src="contacto.png" class="whatsapp" alt="WhatsApp">
+    </a>
+
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('datetime').textContent = `${day}/${month}/${year} - ${hours}:${minutes} HS`;
+        }
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
