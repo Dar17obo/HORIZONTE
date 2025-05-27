@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Radio Horizonte 103.1</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    #barra {
+      display: flex;
+      justify-content: center;
+      align-items: end;
+      height: 140px;
+      margin-top: 30vh;
+    }
+
+    .barra {
+      width: 5px;
+      background: white;
+      margin: 0 2px;
+      animation: subir 1s infinite ease-in-out;
+    }
+
+    .barra:nth-child(1) { animation-delay: 0s; }
+    .barra:nth-child(2) { animation-delay: 0.1s; }
+    .barra:nth-child(3) { animation-delay: 0.2s; }
+    .barra:nth-child(4) { animation-delay: 0.3s; }
+    .barra:nth-child(5) { animation-delay: 0.4s; }
+    .barra:nth-child(6) { animation-delay: 0.5s; }
+    .barra:nth-child(7) { animation-delay: 0.6s; }
+    .barra:nth-child(8) { animation-delay: 0.7s; }
+    .barra:nth-child(9) { animation-delay: 0.8s; }
+    .barra:nth-child(10) { animation-delay: 0.9s; }
+    .barra:nth-child(11) { animation-delay: 1s; }
+
+    @keyframes subir {
+      0%, 100% { height: 20px; }
+      50% { height: 100px; }
+    }
+
+    #frase {
+      position: absolute;
+      top: 130px;
+      width: 100%;
+      text-align: center;
+      font-style: italic;
+      font-size: 26px;
+      color: white;
+      animation: scroll 10s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+
+    #controls {
+      position: absolute;
+      bottom: 70px;
+      width: 100%;
+      text-align: center;
+    }
+
+    #controls img {
+      width: 65px;
+      height: 65px;
+      margin: 0 10px;
+    }
+
+    #whatsapp {
+      position: absolute;
+      bottom: 150px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #whatsapp img {
+      width: 65px;
+      height: 65px;
+    }
+
+    #fecha-hora {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="frase">Estamos con Vos...</div>
+
+  <div id="barra">
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+    <div class="barra"></div>
+  </div>
+
+  <div id="whatsapp">
+    <a href="https://wa.me/543482391583" target="_blank">
+      <img src="contacto.png" alt="WhatsApp" />
+    </a>
+  </div>
+
+  <div id="controls">
+    <img src="PAUSE.png" onclick="document.getElementById('stream').pause()" alt="Pause" />
+    <img src="PLAY.png" onclick="document.getElementById('stream').play()" alt="Play" />
+    <img src="STOP.png" onclick="detener()" alt="Stop" />
+  </div>
+
+  <div id="fecha-hora"></div>
+
+  <audio id="stream">
+    <source src="https://radio13.servidorderadio.net/9346/stream" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    function detener() {
+      const audio = document.getElementById('stream');
+      audio.pause();
+      audio.currentTime = 0;
+    }
+
+    function actualizarFechaHora() {
+      const ahora = new Date();
+      const fecha = ahora.toLocaleDateString();
+      const hora = ahora.toLocaleTimeString();
+      document.getElementById('fecha-hora').textContent = `${fecha} - ${hora}`;
+    }
+
+    setInterval(actualizarFechaHora, 1000);
+    actualizarFechaHora();
+  </script>
+</body>
+</html>
