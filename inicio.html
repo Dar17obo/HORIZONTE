@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Horizonte 103.1</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+    }
+    .frase {
+      position: absolute;
+      top: 190px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    .frase span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 15s linear infinite;
+      font-size: 18px;
+      color: white;
+      text-shadow: 1px 1px 2px #000;
+    }
+    @keyframes scroll {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-100%, 0); }
+    }
+    .barra-audio {
+      position: absolute;
+      top: 240px;
+      width: 100%;
+      height: 80px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: flex-end;
+    }
+    .barra-audio div {
+      background: white;
+      width: 4px;
+      animation: subirBajar 1s infinite ease-in-out alternate;
+    }
+    .barra-audio div:nth-child(odd) { animation-delay: 0.1s; }
+    .barra-audio div:nth-child(even) { animation-delay: 0.2s; }
+
+    @keyframes subirBajar {
+      0% { height: 10px; }
+      100% { height: 80px; }
+    }
+
+    .whatsapp {
+      position: absolute;
+      bottom: 190px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+    }
+
+    .botones {
+      position: absolute;
+      bottom: 80px;
+      width: 100%;
+      text-align: center;
+    }
+    .botones img {
+      width: 60px;
+      height: auto;
+      margin: 0 10px;
+    }
+    .botones img.play {
+      width: 80px;
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="frase"><span>Estamos con Vos - Música - Noticias - Buenos Momentos -</span></div>
+
+  <div class="barra-audio">
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+    <div></div><div></div><div></div><div></div><div></div>
+  </div>
+
+  <img src="contacto.png" class="whatsapp" alt="WhatsApp">
+
+  <div class="botones">
+    <img src="PAUSE.png" class="pause" onclick="document.getElementById('stream').pause()" alt="Pausa">
+    <img src="PLAY.png" class="play" onclick="document.getElementById('stream').play()" alt="Play">
+    <img src="STOP.png" class="stop" onclick="stopAudio()" alt="Stop">
+  </div>
+
+  <audio id="stream">
+    <source src="https://radio13.servidorderadio.net:9346/stream" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function stopAudio() {
+      var audio = document.getElementById('stream');
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  </script>
+</body>
+</html>
